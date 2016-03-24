@@ -13,6 +13,8 @@ LDP = rdflib.Namespace('http://www.w3.org/ns/ldp#')
 
 FEDORA4 = rdflib.Namespace('http://fedora.info/definitions/v4/repository#')
 
+# rdf descriptors for easy access to get/set rdf values
+
 class Value(object):
     """A data descriptor that gets a rdf single value.
     """
