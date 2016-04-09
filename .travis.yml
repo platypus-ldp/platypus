@@ -1,8 +1,8 @@
-language:
-  - python
-  - ruby
+language: python
 install:
+  - rvm use 2.2.2 --install --binary --fuzzy
   - gem install derby
 before_script:
   - derby-ldp &
+  - sleep 5
 script: python setup.py test
