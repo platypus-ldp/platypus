@@ -1,0 +1,8 @@
+language:
+  - python
+  - ruby
+install:
+  - gem install derby
+before_script:
+  - derby-ldp &
+script: python setup.py test
