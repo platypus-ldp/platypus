@@ -316,39 +316,3 @@ class NonRdfResource(object):
             self.uri = response.headers['location']
         print response
         print response.content
-
-
-# interact with existing cover object created in fedora4 tutorial
-cover = LdpResource('http://localhost:8080/fcrepo/rest/cover')
-print cover.dc_publisher
-print cover.dc_title
-for t in cover.rdf_types:
-    print t
-
-cover.dc_publisher = 'emory'
-del cover.dc_title
-print cover.dc_publisher
-print cover.dc_title
-print cover.graph_updates.serialize()
-cover.save()
-
-print 'created ', cover.created
-print 'last modified ', cover.last_modified
-print 'created by', cover.created_by
-
-for m in cover.members:
-    print m.uri
-
-# create a new object within the cover container
-# newobj = LdpResource(container='http://localhost:8080/fcrepo/rest/cover')
-# newobj.dc_title = 'create new'
-# newobj.create()
-
-# create a non-rdf resource within the cover container
-newfile = NonRdfResource(container='http://localhost:8080/fcrepo/rest/cover')
-with open('/Users/rsutton/Downloads/networks-book.pdf') as pdf:
-    newfile.content = pdf
-    newfile.filename = 'networks-book.pdf'
-    newfile.content_type = 'application/pdf'
-
-    newfile.create()
