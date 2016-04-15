@@ -14,4 +14,6 @@ setup(name='platypus',
         'requests',
         'rdflib'
       ],
+      setup_requires=['pytest-runner'],
+      tests_require=['pytest'],
       zip_safe=False)

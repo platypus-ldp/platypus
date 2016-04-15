@@ -182,7 +182,7 @@ class LdpResource(DublinCoreMixin, FedoraMixin):
         self.graph_deletes = rdflib.Graph()
 
         if self.uri is not None:
-            response = requests.get(self.uri, headers={"Accept" : 'application/rdf+xml'})
+            response = requests.get(self.uri, headers={"Accept": 'application/rdf+xml'})
             print response.headers
 
         # NOTE: header says what kind of thing this is,
@@ -193,7 +193,6 @@ class LdpResource(DublinCoreMixin, FedoraMixin):
         # or for binary:
         #'link': '<http://www.w3.org/ns/ldp#Resource>;rel="type", <http://www.w3.org/ns/ldp#NonRDFSource>;rel="type",
         # <http://localhost:8080/fcrepo/rest/cover/cover2.jpg/fcr:metadata>; rel="describedby"',
-
 
         # don't try to load as rdf it isn't rdf!
             if response.headers['content-type'] == 'application/rdf+xml':
@@ -231,11 +230,10 @@ class LdpResource(DublinCoreMixin, FedoraMixin):
         if response.status_code == requests.codes.created:
             # also returns etag
             self.uri = response.headers['location']
-        print response
-        print response.content
+            return True
+        return False
 
     def save(self):
-
         # for now, assuming patch update of rdf properties
         if not self.graph_deletes and not self.graph_updates:
             print 'no deletes or updates, returning'
@@ -287,6 +285,14 @@ class LdpResource(DublinCoreMixin, FedoraMixin):
         response = requests.patch(self.uri, update,
             headers={"Content-Type": 'application/sparql-update'})
         print response.content
+        return response.status_code == requests.codes.no_content
+
+    def delete(self):
+        response = requests.delete(self.uri)
+        if response.status_code == requests.codes.no_content:
+            return True
+        return False
+
 
 
 class NonRdfResource(object):
