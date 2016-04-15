@@ -1,14 +1,17 @@
-from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
+from setuptools import setup
 
-import platypus
+from platypus import __version__
 
 setup(name='platypus',
-  version=platypus.__version__,
-  description='A Python LDP client',
-  url='http://github.com/platypus-ldp/platypus',
-  author='rlskoeser, barmintor, cmh2166, jrhoads',
-  author_email='platypus-ldp@googlegroups.com',
-  license='MIT',
-  packages=['platypus'],
-  zip_safe=False)
+      version=__version__,
+      description='A Python LDP client',
+      url='http://github.com/platypus-ldp/platypus',
+      author='rlskoeser, barmintor, cmh2166, jrhoads',
+      author_email='platypus-ldp@googlegroups.com',
+      license='MIT',
+      packages=['platypus'],
+      install_requires=[
+        'requests',
+        'rdflib'
+      ],
+      zip_safe=False)
