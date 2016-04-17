@@ -213,6 +213,9 @@ class LdpResource(DublinCoreMixin, FedoraMixin):
 
         return rdflib.URIRef('')
 
+    def __repr__(self):
+        return '<LdpResource %s>' % (self.uri or '(unsaved)')
+
     def create(self):
         # param opt
         # CHECKSUM (Optional) Provide a SHA-1 checksum which will be checked against the uploaded content to ensure error-free transfer.
